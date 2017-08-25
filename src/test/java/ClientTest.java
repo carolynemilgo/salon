@@ -14,10 +14,9 @@ public class ClientTest{
    }
    @Test
    public void getClientId_clientsInstantiateWithAnID_1() {
-     //Task.clear();  // Remember, the test will fail without this line! We need to empty leftover Tasks from previous tests!
-       Client myClient= new Client("Caro", 8787, 1);
-       myClient.save();
-       assertTrue(myClient.getId() > 0);
+      Client myClient= new Client("Caro", 8787, 1);
+      myClient.save();
+      assertTrue(myClient.getId() > 0);
    }
    @Test
    public void client_InstantiatesWithPhoneNumber_0723456(){
@@ -42,6 +41,14 @@ public void update_updatesClientDetails_true(){
   assertEquals("Kim", Client.find(myClient.getId()).getClientName());
 }
 
+
+@Test
+public void update_updatesClientsPhoneNumber_true(){
+  Client myClient=new Client("Eli", 765, 1);
+  myClient.save();
+  myClient.update("Eli", 766);
+  assertEquals(766, Client.find(myClient.getId()).getClientNumber());
+}
 @Test
 public void save_clientSavedToTheDB_true(){
   Client myClient=new Client("Joan", 769, 1);
