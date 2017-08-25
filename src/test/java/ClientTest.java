@@ -41,7 +41,6 @@ public void update_updatesClientDetails_true(){
   assertEquals("Kim", Client.find(myClient.getId()).getClientName());
 }
 
-
 @Test
 public void update_updatesClientsPhoneNumber_true(){
   Client myClient=new Client("Eli", 765, 1);

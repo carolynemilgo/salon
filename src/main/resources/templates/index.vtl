@@ -1,9 +1,16 @@
-<h2>New Category:</h2>
+<h2>Stylists</h2>
+#if($stylists)
+#foreach ($stylist in $stylists)
+<p><a href="/stylists/$stylist.getId()">$stylist.getName()</a></p>
+#end
+#else
+<p>No stylists!</p>
+#end
 
 <form action="/stylists" method="post">
-  <label for="stylistName">Category name</label>
+  <label for="stylistName">Stylist name</label>
   <input id="stylistName" name="stylistName" type="text">
-  <label for="stylistNumber">Category name</label>
+  <label for="stylistNumber">Phone number</label>
   <input id="stylistNumber" name="stylistNumber" type="text">
   <button type="submit" class="btn btn-success">Create Stylist</button>
 </form>
