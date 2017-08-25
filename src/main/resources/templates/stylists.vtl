@@ -3,11 +3,22 @@
 
 <ul>
   #foreach($stylist in $stylist.getClients())
-   <li> <a href="/stylists/$stylist.getId()/clients/$client.getId()">$stylist.getClientName()</li>
+   <li>$stylist.getClientName()</li>
   #end
   <form action="/stylists/$stylist.getId()/delete" method="post">
        <button class="btn btn-danger" id="delete">Delete Stylist </button>
      </form>
+
+
+     <h3>Edit this stylist</h3>
+
+     <form action="/stylists/$stylist.getId()/update" method="post">
+         <label for="stylistName">Name</label>
+         <input id="stylistName" name="stylistName" type="text">
+         <label for="stylistNumber">Number</label>
+         <input id="stylistNumber" name="stylistNumber" type="text">
+         <button class="btn btn-success" id="update">Update Stylist </button>
+        </form>
 </ul>
 
 

@@ -37,6 +37,7 @@ public class App {
     get("/clients", (request, response) ->{
       Map<String, Object> model= new HashMap<String, Object>();
       model.put("stylists", Stylist.all());
+      model.put("clients", Client.all());
       model.put("template", "templates/add-client.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -91,6 +92,37 @@ public class App {
         model.put("template", "templates/index.vtl");
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
+
+      post("/stylists/:id/update", (request, response) ->{
+        Map<String, Object> model=new HashMap<String, Object>();
+        //Task task=Task.find(Integer.parseInt(request.params("id")));
+        Stylist stylist=Stylist.find(Integer.parseInt(request.params(":id")));
+        String stylist_name=request.queryParams("stylistName");
+        int stylist_number=Integer.parseInt(request.queryParams("stylistNumber"));
+        //Category category=Category.find(task.getCategoryId());
+        stylist.update(stylist_name, stylist_number);
+        //String url = String.format("/stylists/%d/", stylist.getId());
+        response.redirect("/");
+        return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+
+        get("/client", (request, response) ->{
+          Map<String, Object> model= new HashMap<String, Object>();
+          model.put("clients", Client.all());
+          model.put("template", "templates/client.vtl");
+          return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        post("/clients/:id/delete", (request,response) ->{
+          Map<String, Object> model= new HashMap<String, Object>();
+           Client client = Client.find(Integer.parseInt(request.params("id")));
+          client.delete();
+          model.put("client", client);
+          model.put("template", "templates/success.vtl");
+          return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
   }
 
 

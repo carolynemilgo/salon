@@ -1,8 +1,3 @@
-<!-- <h1>$client.getClientName()</h1>
-
-<h2> Belongs to: $stylist.getName().</h2> -->
-
-
 #foreach($client in $clients)
 <p>$client.getClientName()</p>
 <form action="/clients/$client.getId()/delete" method="post">
