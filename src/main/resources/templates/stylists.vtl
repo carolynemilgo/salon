@@ -5,4 +5,13 @@
   #foreach($stylist in $stylist.getClients())
    <li> <a href="/stylists/$stylist.getId()/clients/$client.getId()">$stylist.getClientName()</li>
   #end
+  <form action="/stylists/$stylist.getId()/delete" method="post">
+       <button class="btn btn-danger" id="delete">Delete Stylist </button>
+     </form>
 </ul>
+
+
+<!--
+<form action="/categories/$task.getCategoryId()/tasks/$task.getId()/delete" method="post">
+  <button type="submit" class="btn btn-danger" id="delete-task">Delete Task</button>
+</form> -->
