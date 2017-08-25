@@ -66,5 +66,12 @@ public class StylistTest{
     Stylist savedStylist= Stylist.all().get(0);
     assertEquals(myStylist.getId(), savedStylist.getId());
   }
-
+  @Test
+  public void delete_deletesStylist_true(){
+    Stylist myStylist=new Stylist("Joy", 7778);
+    myStylist.save();
+    int myStylistId=myStylist.getId();
+    myStylist.delete();
+    assertEquals(null, Stylist.find(myStylistId));
+  }
 }

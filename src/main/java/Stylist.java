@@ -6,14 +6,14 @@ import org.sql2o.*;
 
 
 public class Stylist{
-  private String stylistName;
-  private int stylistNumber;
+  private String stylist_name;
+  private int stylist_number;
   private int id;
 
 
-public Stylist(String stylistName, int stylistNumber){
-  this.stylistName=stylistName;
-  this.stylistNumber=stylistNumber;
+public Stylist(String stylist_name, int stylist_number){
+  this.stylist_name=stylist_name;
+  this.stylist_number=stylist_number;
 }
 
 @Override
@@ -36,11 +36,11 @@ public static List<Stylist> all(){
 }
 
 public String getName(){
-  return stylistName;
+  return stylist_name;
 }
 
 public int getNumber(){
-  return stylistNumber;
+  return stylist_number;
 }
 
 public int getId(){
@@ -49,11 +49,11 @@ public int getId(){
 
 public void save(){
   try(Connection con=DB.sql2o.open()){
-    String sql="INSERT INTO stylists (stylistName,stylistNumber) VALUES (:stylistName,:stylistNumber)";
+    String sql="INSERT INTO stylists (stylist_name,stylist_number) VALUES (:stylist_name,:stylist_number)";
     //con.createQuery(sql)
     this.id=(int) con.createQuery(sql, true)
-    .addParameter("stylistName", this.stylistName)
-    .addParameter("stylistNumber", this.stylistNumber)
+    .addParameter("stylist_name", this.stylist_name)
+    .addParameter("stylist_number", this.stylist_number)
     .executeUpdate()
     .getKey();
   }
@@ -69,15 +69,33 @@ try(Connection con=DB.sql2o.open()){
 }
 }
 
-public List<Stylist> getStylists(){
-//return mTasks;
-try(Connection con=DB.sql2o.open()){
-  String sql="SELECT * FROM stylists WHERE stylistId=:id";
-  return con.createQuery(sql)
-  .addParameter("id", this.id)
-  .executeAndFetch(Stylist.class);
-}
-}
+// public List<Stylist> getClients(){
+// //return mTasks;
+// try(Connection con=DB.sql2o.open()){
+//   String sql="SELECT * FROM stylists WHERE stylistId=:id";
+//   return con.createQuery(sql)
+//   .addParameter("id", this.id)
+//   .executeAndFetch(Stylist.class);
+// }
+// }
 
+public void update(String stylist_name, int stylist_number){
+  try(Connection con=DB.sql2o.open()){
+    String sql="UPDATE stylists SET stylist_name= :stylist_name,stylist_number=:stylist_number WHERE id=:id";
+    con.createQuery(sql)
+    .addParameter("stylist_name", stylist_name)
+    .addParameter("stylist_number", stylist_number)
+    .addParameter("id", id)
+    .executeUpdate();
+  }
+}
+public void delete(){
+  try(Connection con= DB.sql2o.open()){
+    String sql="DELETE FROM stylists WHERE id=:id";
+    con.createQuery(sql)
+    .addParameter("id",id)
+    .executeUpdate();
+  }
+}
 
 }
