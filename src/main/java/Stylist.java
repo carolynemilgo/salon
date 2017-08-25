@@ -69,15 +69,14 @@ try(Connection con=DB.sql2o.open()){
 }
 }
 
-// public List<Stylist> getClients(){
-// //return mTasks;
-// try(Connection con=DB.sql2o.open()){
-//   String sql="SELECT * FROM stylists WHERE stylistId=:id";
-//   return con.createQuery(sql)
-//   .addParameter("id", this.id)
-//   .executeAndFetch(Stylist.class);
-// }
-// }
+public List<Client> getClients(){
+try(Connection con=DB.sql2o.open()){
+  String sql="SELECT * FROM clients WHERE stylistid=:id";
+  return con.createQuery(sql)
+  .addParameter("id", this.id)
+  .executeAndFetch(Client.class);
+}
+}
 
 public void update(String stylist_name, int stylist_number){
   try(Connection con=DB.sql2o.open()){
